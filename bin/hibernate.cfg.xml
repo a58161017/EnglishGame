@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <!DOCTYPE hibernate-configuration SYSTEM 
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+
+		<property name="hibernate.dialect">
+			com.applerao.hibernatesqlite.dialect.SQLiteDialect
+		</property>
+		<property name="hibernate.connection.driver_class">
+			org.sqlite.JDBC
+		</property>
+		<property name="hibernate.connection.url">
+			jdbc:sqlite:EnglishWord.db
+		</property>
+		<property name="show_sql">true</property>
+       	<property name="format_sql">true</property>
+		
+		<mapping resource="Word.hbm.xml" />
+
+	</session-factory>
+</hibernate-configuration>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="kiuya.hibernate.sqlite.Word" table="Word">
+		<id name="id" column="id">
+			<generator class="native" />
+		</id>
+		<property name="word" column="word" />
+		<property name="explain" column="explain" />
+
+	</class>
+
+	<sql-query name="kiuya.hibernate.QueryWord">
+        <![CDATA[
+            select word.* from Word word order by word
+          ]]>
+		<return alias="word" class="kiuya.hibernate.sqlite.Word" />
+	</sql-query>
+</hibernate-mapping>
+
+<!-- 1、identity：用於MySql資料庫。特點：遞增 
+	 2、sequence：用於Oracle資料庫 
+	 3、native：跨資料庫時使用，由底層方言產生。 
+	 4、hilo：通過高低位合成id，先建表hi_value，再建列next_value。必須要有初始值。 
+	 5、sequencehilo：同過高低位合成id，建一個sequence序列，不用建表。 
+	 6、assigned：用戶自訂id; 
+	 7、foreign：用於一對一關聯性共用主鍵時，兩id值一樣。
+-->
