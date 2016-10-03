@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 public class SQLiteMethod {
+	//尚未使用
 	public void insertData(){
 		// 開啟Session，相當於開啟JDBC的Connection
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -80,6 +81,7 @@ public class SQLiteMethod {
 		HibernateUtil.shutdown();
 	}
 	
+	//尚未使用
 	public void updateData(){
 		// 開啟Session，相當於開啟JDBC的Connection
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -105,16 +107,19 @@ public class SQLiteMethod {
 		HibernateUtil.shutdown();
 	}
 	
-	public void selectDataByHQL(){
+	//暫停使用Hibernate查詢單字，由於hibernate的log訊息會蓋掉遊戲訊息
+	public int selectCountByWord(char c){
 		// 開啟Session，相當於開啟JDBC的Connection
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		int count = 0;
 		
-		Query query = session.createQuery("select id,word,explain from Word order by word"); 
+		Query query = session.createQuery("select id,word,explain from Word where word like '"+c+"%'");
 		List words = query.list();
 		Iterator iterator =  words.iterator();
 		while(iterator.hasNext()) {
 			Object[] obj = (Object[])iterator.next();
-		    System.out.println(obj[0]+"/"+obj[1]+"/"+obj[2]);
+			System.out.println(obj[0]+"/"+obj[1]+"/"+obj[2]);
+		    count++;
 		}
 		
 		//Query query = session.createQuery("from Word where word = 'apple'"); 
@@ -127,9 +132,9 @@ public class SQLiteMethod {
 		    System.out.println(word.getWord()+"/"+word.getExplain());
 		}*/
 		
-		System.out.println("新增資料OK!請先用SQLite Browser觀看結果！");
-		//log.debug("新增資料OK!請先用SQLite Browser觀看結果！");
-
+		session.close();
 		HibernateUtil.shutdown();
+		
+		return count;
 	}
 }

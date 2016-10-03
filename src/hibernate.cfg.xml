@@ -14,8 +14,8 @@
 		<property name="hibernate.connection.url">
 			jdbc:sqlite:EnglishWord.db
 		</property>
-		<property name="show_sql">true</property>
-       	<property name="format_sql">true</property>
+		<property name="show_sql">false</property>
+       	<property name="format_sql">false</property>
 		
 		<mapping resource="Word.hbm.xml" />
 
